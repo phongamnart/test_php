@@ -15,15 +15,24 @@
             border-bottom: 1px solid;
         }
     </style>
+    <script>
+        function confirmDelete(id) {
+            if (confirm("Are you sure you want to delete this employee?")) {
+                location.href = 'delete.php?id=' + id;
+            }
+        }
+    </script>
 </head>
 <body>
-    <h1>Employees information</h1>
+    <h1>Employees information</h1><br>
+    <button onclick="location.href='add.php';">Add new employee</button>
     <table>
         <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Department</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
         <?php
         include("connect.php");
@@ -38,6 +47,7 @@
                 echo "<td>{$row['email']}</td>";
                 echo "<td>{$row['department']}</td>";
                 echo "<td><button onclick='location.href=\"edit.php?id={$row['id']}\";'>Edit</button></td>";
+                echo "<td><button onclick='confirmDelete({$row['id']})'>Delete</button></td>";
                 echo "<tr>";
             }
         } else {
