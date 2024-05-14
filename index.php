@@ -33,6 +33,7 @@
             <th>Department</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th>Resume</th>
         </tr>
         <?php
         include("connect.php");
@@ -48,6 +49,7 @@
                 echo "<td>{$row['department']}</td>";
                 echo "<td><button onclick='location.href=\"edit.php?id={$row['id']}\";'>Edit</button></td>";
                 echo "<td><button onclick='confirmDelete({$row['id']})'>Delete</button></td>";
+                echo "<td>{$row['resume']}</td>";
                 echo "<tr>";
             }
         } else {

@@ -4,15 +4,23 @@ include("connect.php");
 $name = $_POST['name'];
 $email = $_POST['email'];
 $department = $_POST['department'];
+$file = null;
 
-$sql = "insert into employees (name, email, department) values ('$name', '$email', '$department')";
+if(isset($_FILES['resume']) && $_FILES['resume']['error'] === UPLOAD_ERR_OK) {
+    $file = file_get_contents($_FILES['resume']['tmp_name']);
+}
 
-if(mysqli_query($conn, $sql)) {
+$sql = "insert into employees (name, email, department, resume) values (?, ?, ?, ?)";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("sssb", $name, $email, $department, $file);
+
+if($stmt->execute()) {
     header("location: index.php");
     exit();
 } else {
-    echo "Error: ". mysqli_error($conn);
+    echo "Error: ". $stmt->error;
 }
 
-mysqli_close($conn);
+$stmt->close();
+$conn->close();
 ?>
