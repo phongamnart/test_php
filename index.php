@@ -14,6 +14,9 @@
             text-align: center;
             border-bottom: 1px solid;
         }
+        h1{
+            text-align: center;
+        }
     </style>
     <script>
         function confirmDelete(id) {
@@ -25,7 +28,6 @@
 </head>
 <body>
     <h1>Employees information</h1><br>
-    <button onclick="location.href='add.php';">Add new employee</button>
     <table>
         <tr>
             <th>Name</th>
@@ -56,6 +58,7 @@
             echo "<tr><td>Not found information</td></tr>";
         }
         ?>
-    </table>
+    </table><br><br>
+    <button onclick="location.href='add.php';">Add new employee</button>
 </body>
 </html>
