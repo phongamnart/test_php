@@ -9,7 +9,7 @@ if(isset($_POST['submit'])) {
         $targetFilePath = $targetDir . $filename;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-        $allowTypes = array('jpg','png','jpeg','gif','pdf');
+        $allowTypes = array('pdf');
         if(in_array($fileType, $allowTypes)) {
             if(move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)){
                 $insert = $conn->query("insert into pdf(filename, uploaded_on) values ('".$filename."', NOW())");
