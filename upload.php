@@ -6,31 +6,29 @@
     <title>Upload file</title>
 </head>
 <body>
-    <form method="POST" enctype="multipart/form-data">
-        <label>Title</label>
-        <input type="text" name="title">
-        <label>Upload file</label>
-        <input type="file" name="file">
-        <input type="submit" name="submit">
-    </form>
-
     <?php
     include("connect.php");
-    
-    if(isset($_POST["submit"])){
-        $title = $_POST['title'];
-        $pname = rand(100,10000)."-".$_FILES['file']['name'];
-        $tname = $_FILES['file']['tmp_name'];
-        $upload_dir = '/images';
-        move_uploaded_file($tname, $upload_dir.'/'.$pname);
+    if(!empty($statusMsg)){
+        echo $statusMsg;
+    }
 
-        $sql = "insert into img(title, image) values('$title', '$pname')";
-        if(mysqli_query($conn, $sql)){
-            echo "Upload Successfully";
-        } else {
-            echo "Error";
+    $sql = $conn->query("select * from images ORDER BY uploaded_on DESC");
+    if($sql->num_rows > 0){
+        while($row = $sql->fetch_assoc()){
+            $imageURL = 'uploads/'.$row['file_name'];
         }
+    } else {
+        echo "No image found";
     }
     ?>
+
+    <form action="upload_be.php" method="POST" enctype="multipart/form-data">
+        <h2>Select image file to upload</h2>
+        <input type="file" name="file" accept="image/gif, image/jpeg, image/png"><br><br>
+        <input type="submit" name="submit" value="Upload">
+
+        <img src="<?php echo $imageURL ?>" alt="" width="100%">
+
+    </form>
 </body>
 </html>
