@@ -12,7 +12,7 @@ if (isset($_POST['doc_name'])) {
         $typefile = strrchr($_FILES['doc_file']['name'], ".");
         if ($typefile == '.pdf') {
             $path = "docs/";
-            $newname = 'doc_' . $numrand . $date1 . $typefile;
+            $newname = pathinfo($_FILES['doc_file']['name'], PATHINFO_FILENAME) . $typefile;
             $path_copy = $path . $newname;
             move_uploaded_file($_FILES['doc_file']['tmp_name'], $path_copy);
             $doc_name = $_POST['doc_name'];
