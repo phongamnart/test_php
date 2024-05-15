@@ -9,27 +9,27 @@ if(isset($_POST['submit'])) {
         $targetFilePath = $targetDir . $filename;
         $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
-        $allowTypes = array('pdf');
+        $allowTypes = array('jpg', 'jpeg', 'png', 'gif');
         if(in_array($fileType, $allowTypes)) {
             if(move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)){
-                $insert = $conn->query("insert into pdf(filename, uploaded_on) values ('".$filename."', NOW())");
+                $insert = $conn->query("insert into images(file_name, uploaded_on) values ('".$filename."', NOW())");
                 if($insert) {
-                    header("location: test.php");
+                    header("location: upload_img.php");
                     exit();
                 } else {
-                    header("location: test.php");
+                    header("location: upload_img.php");
                     exit();
                 }
             } else {
-                header("location: test.php");
+                header("location: upload_img.php");
                 exit();
             }
         } else {
-            header("location: test.php");
+            header("location: upload_img.php");
             exit();
         }
     } else {
-        header("location: test.php");
+        header("location: upload_img.php");
         exit();
     }
 }

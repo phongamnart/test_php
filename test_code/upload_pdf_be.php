@@ -1,12 +1,11 @@
 <?php
 
 if (isset($_POST['doc_name'])) {
-    include("connect_pdo.php");
+    include("connect.php");
     $date1 = date("Ymd_His");
     $numrand = (mt_rand());
     $doc_file = (isset($_POST['doc_file']) ? $_POST['doc_file'] : '');
     $upload = $_FILES['doc_file']['name'];
-    
 
     if ($upload != '') {
         $typefile = strrchr($_FILES['doc_file']['name'], ".");
@@ -31,8 +30,6 @@ if (isset($_POST['doc_name'])) {
                       });
                     }, 1000);
                 </script>';
-                header("location: upload_pdf.php");
-                exit();
             } else {
                 echo '<script>
                      setTimeout(function() {
@@ -44,8 +41,6 @@ if (isset($_POST['doc_name'])) {
                       });
                     }, 1000);
                 </script>';
-                header("location: upload_pdf.php");
-                exit();
             }
 
 
@@ -60,8 +55,6 @@ if (isset($_POST['doc_name'])) {
                           });
                         }, 1000);
                     </script>';
-                    header("location: upload_pdf.php");
-                    exit();
         }
     }
 }

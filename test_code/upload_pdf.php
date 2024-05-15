@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <h1>Basic Upload pdf file PHP PDO</h1>
+    <h1>PHP PDO Basic Upload PDF File</h1>
     <form action="upload_pdf_be.php" method="post" enctype="multipart/form-data">
-        <input type="text" name="doc_name" required placeholder="ชื่อเอกสาร">
-        <input type="file" name="doc_file" required accept="application/pdf"> <br><br>
+        <input type="text" name="doc_name" required class="form-control" placeholder="ชื่อเอกสาร">
+        <input type="file" name="doc_file" required class="form-control" accept="application/pdf"> <br><br>
         <button type="submit" class="btn btn-primary">Upload</button>
     </form>
     <h2>รายการเอกสาร </h2>
@@ -26,7 +26,7 @@
         </thead>
         <tbody>
             <?php
-            include("connect_pdo.php");
+            include("connect.php");
             $stmt = $conn->prepare("select * from tbl_pdf");
             $stmt->execute();
             $result = $stmt->fetchAll();
