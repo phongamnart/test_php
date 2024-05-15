@@ -51,7 +51,7 @@
                 echo "<td>{$row['department']}</td>";
                 echo "<td><button onclick='location.href=\"edit.php?id={$row['id']}\";'>Edit</button></td>";
                 echo "<td><button onclick='confirmDelete({$row['id']})'>Delete</button></td>"; ?>
-                <td><button onclick="window.open('docs/<?php echo $row['doc_name'];?>', '_blank');"><?php echo $row['doc_name']?></button></td>
+                <td><button onclick="window.open('docs/<?php echo $row['doc_file'];?>', '_blank');"><?php echo $row['doc_file']?></button></td>
                 <?php echo "<tr>";
             }
         } else {
