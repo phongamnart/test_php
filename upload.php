@@ -8,26 +8,23 @@
 <body>
     <?php
     include("connect.php");
-    if(!empty($statusMsg)){
-        echo $statusMsg;
-    }
 
-    $sql = $conn->query("select * from images ORDER BY uploaded_on DESC");
+    $sql = $conn->query("select * from pdf ORDER BY uploaded_on DESC");
     if($sql->num_rows > 0){
         while($row = $sql->fetch_assoc()){
-            $imageURL = 'uploads/'.$row['file_name'];
+            $pdf = 'uploads/'.$row['filename'];
         }
     } else {
-        echo "No image found";
+        echo "Not found";
     }
     ?>
 
     <form action="upload_be.php" method="POST" enctype="multipart/form-data">
-        <h2>Select image file to upload</h2>
-        <input type="file" name="file" accept="image/gif, image/jpeg, image/png"><br><br>
+        <h2>Select pdf file to upload</h2>
+        <input type="file" name="file" accept="application/pdf"><br><br>
         <input type="submit" name="submit" value="Upload">
 
-        <img src="<?php echo $imageURL ?>" alt="" width="100%">
+        <img src="<?php echo $pdf ?>" alt="" width="100%">
 
     </form>
 </body>
