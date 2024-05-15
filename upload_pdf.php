@@ -35,7 +35,7 @@
                 <tr>
                     <td><?= $row['no']; ?></td>
                     <td><?= $row['doc_name']; ?></td>
-                    <td><a href="docs/<?php echo $row['doc_file']; ?>" target="_blank" class="btn btn-info btn-sm"> เปิดดู </a></td>
+                    <td><a href="docs/<?php echo $row['doc_file'];?>" target="_blank"> เปิดดู </a></td>
                 <?php } ?>
         </tbody>
     </table>

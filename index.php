@@ -50,14 +50,15 @@
                 echo "<td>{$row['email']}</td>";
                 echo "<td>{$row['department']}</td>";
                 echo "<td><button onclick='location.href=\"edit.php?id={$row['id']}\";'>Edit</button></td>";
-                echo "<td><button onclick='confirmDelete({$row['id']})'>Delete</button></td>";
-                echo "<td>{$row['resume']}</td>";
-                echo "<tr>";
+                echo "<td><button onclick='confirmDelete({$row['id']})'>Delete</button></td>"; ?>
+                <td><button onclick="window.open('docs/<?php echo $row['doc_file'];?>', '_blank');"><?php echo $row['doc_name']?></button></td>
+                <?php echo "<tr>";
             }
         } else {
             echo "<tr><td>Not found information</td></tr>";
         }
         ?>
+        
     </table><br><br>
     <button onclick="location.href='add.php';">Add new employee</button>
 </body>
