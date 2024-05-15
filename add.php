@@ -17,10 +17,7 @@
         <label for="department">Department</label><br>
         <input type="text" name="department" id="department" required><br><br>
 
-        <label for="resume">Resume (.pdf) </label>
-        <input type="file" name="resume" id="resume" accept="application/pdf"><br><br>
-
-        <input type="submit" value="Add new employee">
+        <input type="submit" name="submit" value="Add new employee">
         <button onclick="location.href='index.php';">Back</button>
     </form>
 </body>
