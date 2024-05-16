@@ -46,12 +46,12 @@
         if(mysqli_num_rows($result) > 0) {
             while($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
-                echo "<td>{$row['name']}</td>";
+                echo "<td>{$row['fname']}</td>";
                 echo "<td>{$row['email']}</td>";
                 echo "<td>{$row['department']}</td>";
                 echo "<td><button onclick='location.href=\"edit.php?id={$row['id']}\";'>Edit</button></td>";
                 echo "<td><button onclick='confirmDelete({$row['id']})'>Delete</button></td>"; ?>
-                <td><button onclick="window.open('docs/<?php echo $row['doc_file'];?>', '_blank');"><?php echo $row['doc_file']?></button></td>
+                <td><button onclick="window.open('docs/<?php echo $row['doc_file'];?>', '_blank');">เปิดไฟล์</button></td>
                 <?php echo "<tr>";
             }
         } else {

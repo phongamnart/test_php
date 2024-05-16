@@ -1,18 +1,46 @@
 <?php
-include("connect.php");
+include("connect_pdo.php");
 
-$name = $_POST['name'];
-$email = $_POST['email'];
-$department = $_POST['department'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    $fname = $_POST['fname'];
+    $email = $_POST['email'];
+    $department = $_POST['department'];
 
+    $date1 = date("Ymd_His");
+    $numrand = mt_rand();
+    $upload = $_FILES['doc_file']['name'];
 
-$sql = "insert into employees (name, email, department) values ('$name', '$email', '$department')";
+    if ($upload != '') {
+        $typefile = strrchr($_FILES['doc_file']['name'], ".");
 
-if (mysqli_query($conn, $sql)) {
-    header("location: index.php");
-    exit();
-} else {
-    echo "Error: " . mysqli_error($conn);
+        if ($typefile == '.pdf') {
+            $path = "docs/";
+            $newname = 'doc_' . $numrand . $date1 . $typefile;
+            $path_copy = $path . $newname;
+            move_uploaded_file($_FILES['doc_file']['tmp_name'], $path_copy);
+
+            $doc_name = $_POST['doc_name'];
+
+            $stmt = $conn->prepare("INSERT INTO employees (fname, email, department, doc_name, doc_file, dateCreate) VALUES (:fname, :email, :department, :doc_name, :doc_file, NOW())");
+            $stmt->bindParam(':fname', $fname, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':department', $department, PDO::PARAM_STR);
+            $stmt->bindParam(':doc_name', $doc_name, PDO::PARAM_STR);
+            $stmt->bindParam(':doc_file', $newname, PDO::PARAM_STR);
+
+            if ($stmt->execute()) {
+                header("Location: index.php");
+                exit();
+            } else {
+                echo "Error: " . $stmt->errorInfo()[2];
+            }
+        } else {
+            echo "Error: Only PDF files are allowed.";
+        }
+    } else {
+        echo "Error: No file was uploaded.";
+    }
 }
 
-mysqli_close($conn);
+$conn = null;
+?>
