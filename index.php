@@ -54,8 +54,6 @@
                 <td><button onclick="window.open('docs/<?php echo $row['doc_file'];?>', '_blank');">เปิดไฟล์</button></td>
                 <?php echo "<tr>";
             }
-        } else {
-            echo "<tr><td>Not found information</td></tr>";
         }
         ?>
         
