@@ -29,8 +29,8 @@
 
     <form action="edit_be.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-        <label for="name">Name: </label><br>
-        <input type="text" name="name" id="name" value="<?php echo $row['name']; ?>" required><br><br>
+        <label for="fname">Name: </label><br>
+        <input type="text" name="fname" id="fname" value="<?php echo $row['fname']; ?>" required><br><br>
 
         <label for="email">Email: </label><br>
         <input type="email" name="email" id="email" value="<?php echo $row['email']; ?>" required><br><br>

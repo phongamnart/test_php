@@ -19,13 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             $path_copy = $path . $newname;
             move_uploaded_file($_FILES['doc_file']['tmp_name'], $path_copy);
 
-            $doc_name = $_POST['doc_name'];
-
-            $stmt = $conn->prepare("INSERT INTO employees (fname, email, department, doc_name, doc_file, dateCreate) VALUES (:fname, :email, :department, :doc_name, :doc_file, NOW())");
+            $stmt = $conn->prepare("INSERT INTO employees (fname, email, department, doc_file, dateCreate) VALUES (:fname, :email, :department, :doc_file, NOW())");
             $stmt->bindParam(':fname', $fname, PDO::PARAM_STR);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->bindParam(':department', $department, PDO::PARAM_STR);
-            $stmt->bindParam(':doc_name', $doc_name, PDO::PARAM_STR);
             $stmt->bindParam(':doc_file', $newname, PDO::PARAM_STR);
 
             if ($stmt->execute()) {
